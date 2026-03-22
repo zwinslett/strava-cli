@@ -32,9 +32,4 @@ public class RecentCommand extends BaseCommand implements Runnable {
         }
     }
 
-    public static void main(String[] args) {
-        int exitCode = new picocli.CommandLine(new RecentCommand()).execute(args);
-        System.exit(exitCode);
-    }
-
 }

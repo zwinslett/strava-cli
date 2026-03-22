@@ -9,9 +9,4 @@ public class StatsCommand implements Runnable {
     public void run() {
         System.out.println("Please specify either a weekly or monthly time range.");
     }
-
-    public static void main(String[] args) {
-        int exitCode = new picocli.CommandLine(new StatsCommand()).execute(args);
-        System.exit(exitCode);
-    }
 }

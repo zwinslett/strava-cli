@@ -25,9 +25,4 @@ public class ActivityByIdCommand extends BaseCommand implements Runnable {
             e.printStackTrace();
         }
     }
-
-    public static void main(String[] args) {
-        int exitCode = new picocli.CommandLine(new ActivityByIdCommand()).execute(args);
-        System.exit(exitCode);
-    }
 }
