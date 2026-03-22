@@ -30956,3 +30956,5 @@ WARNING: Unmatched cancel notification for request id 44674
 Mar 22, 2026 9:34:15 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
 INFO: Unsupported notification method: $/setTrace
 2026.03.22 09:34:38 INFO  no build target found for /Users/zachwinslett/Code/strava-cli/src/main/java/com/zwinslett/strava/api/StravaAPIClient.java. Using fallback presentation compiler.
+Mar 22, 2026 9:37:05 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
