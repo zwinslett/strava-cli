@@ -21,7 +21,6 @@ public class RecentCommand extends BaseCommand implements Runnable {
             System.exit(2);
         }
         try {
-           stravaRequest.setAccessToken();
             List<Activity> recentActivityData = stravaRequest.getRecentActivities(this.numActivities);
             for (Activity a : recentActivityData) {
                 Stats stat = calculator.calculateStat(a);
