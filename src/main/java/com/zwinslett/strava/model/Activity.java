@@ -1,14 +1,17 @@
 package com.zwinslett.strava.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Activity {
     private long id;
     private String name;
     private double distance; // meters
-    private int moving_time; // seconds
-    private int elapsed_time; // seconds
+    @JsonProperty("moving_time")
+    private int movingTime; // seconds
+    @JsonProperty("elapse_time")
+    private int elapsedTime; // seconds
     private String type;
 
     public Activity() {
@@ -19,8 +22,8 @@ public class Activity {
         this.id = id;
         this.name = name;
         this.distance = distance;
-        this.moving_time = moving_time;
-        this.elapsed_time = elapsed_time;
+        this.movingTime = moving_time;
+        this.elapsedTime = elapsed_time;
         this.type = type;
     }
 
@@ -37,11 +40,11 @@ public class Activity {
     }
 
     public int getMoving_time() {
-        return moving_time;
+        return movingTime;
     }
 
     public int getElapsed_time() {
-        return elapsed_time;
+        return elapsedTime;
     }
 
     public String getType() {
