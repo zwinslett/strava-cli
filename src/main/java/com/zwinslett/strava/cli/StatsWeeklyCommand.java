@@ -17,8 +17,8 @@ public class StatsWeeklyCommand extends BaseCommand implements Runnable {
         long epochNow = Instant.now().getEpochSecond();
         long sevenDaysAgo = Instant.now().minus(7, ChronoUnit.DAYS).getEpochSecond();
         try {
-            String accessToken = stravaRequest.getAccessToken();
-            List<Activity> recentActivityData = stravaRequest.getRangeActivities(accessToken, epochNow, sevenDaysAgo);
+            stravaRequest.setAccessToken();
+            List<Activity> recentActivityData = stravaRequest.getRangeActivities(epochNow, sevenDaysAgo);
             Stats stats = calculator.calculateStats(recentActivityData);
             System.out.println("In the last seven days ... \n" + ActivityFormatter.formatActivities(stats));
         } catch (Exception e) {

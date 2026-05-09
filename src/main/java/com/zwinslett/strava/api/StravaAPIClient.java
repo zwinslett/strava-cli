@@ -5,10 +5,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zwinslett.strava.formatter.ActivityFormatter;
 import com.zwinslett.strava.model.Activity;
-import com.zwinslett.strava.model.Stats;
-import com.zwinslett.strava.service.ActivityCalculator;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.List;
@@ -22,6 +19,7 @@ public class StravaAPIClient {
 	private static final String CLIENT_ID;
 	private static final String CLIENT_SECRET;
 	private static final String REFRESH_TOKEN;
+	private String accessToken;
 
 	static {
 		try {
@@ -35,9 +33,9 @@ public class StravaAPIClient {
 		}
 	}
 
-	private <T> T doGet(String url, String accessToken, TypeReference<T> input) throws Exception {
+	private <T> T doGet(String url, TypeReference<T> input) throws Exception {
 		HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url))
-				.header("Authorization", "Bearer " + accessToken).GET().build();
+				.header("Authorization", "Bearer " + this.accessToken).GET().build();
 
 		HttpResponse<String> response = this.client.send(request, HttpResponse.BodyHandlers.ofString());
 		if (response.statusCode() == 200) {
@@ -49,7 +47,7 @@ public class StravaAPIClient {
 	}
 
 	// Method to get access token using refresh token
-	public String getAccessToken() throws Exception {
+	public void setAccessToken() throws Exception {
 		HttpRequest request = HttpRequest.newBuilder()
 				.uri(URI.create(STRAVA_AUTH_URL + "?client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET
 						+ "&refresh_token=" + REFRESH_TOKEN + "&grant_type=refresh_token&f=json"))
@@ -58,60 +56,37 @@ public class StravaAPIClient {
 		if (response.statusCode() == 200) {
 			AccessToken token = mapper.readValue(response.body(), AccessToken.class);
 			String accessToken = token.getToken();
-			return accessToken;
+			this.accessToken = accessToken;
 		} else {
 			throw new Exception("Failed to get access token: " + response.statusCode());
 		}
 	}
 
 	// Method to get activity by ID
-	public Activity getActivityById(long activityId, String accessToken) throws Exception {
+	public Activity getActivityById(long activityId) throws Exception {
 		String url = STRAVA_BASE_URL + "/activities/" + activityId;
-		return doGet(url, accessToken, new TypeReference<Activity>() {
+		return doGet(url, new TypeReference<Activity>() {
 		});
 	}
 
 	// Method to get a number of activities, default 1, max 10
-	public List<Activity> getRecentActivities(String accessToken, int per_page) throws Exception {
+	public List<Activity> getRecentActivities(int per_page) throws Exception {
 		if (per_page < 1 || per_page > 10) {
 			throw new IllegalArgumentException("per_page must be between 1 and 10");
 		}
 		String url = StravaAPIClient.STRAVA_BASE_URL + "/athlete/activities?per_page=" + per_page + "&page=1";
-		return doGet(url, accessToken, new TypeReference<List<Activity>>() {
+		return doGet(url, new TypeReference<List<Activity>>() {
 		});
 
 	}
 
 	// Method to get activities in a time range, before and after are epoch
 	// timestamps
-	public List<Activity> getRangeActivities(String accessToken, long before, long after) throws Exception {
+	public List<Activity> getRangeActivities(long before, long after) throws Exception {
 
 		String url = StravaAPIClient.STRAVA_BASE_URL + "/athlete/activities?before=" + before + "&after=" + after;
-		return doGet(url, accessToken, new TypeReference<List<Activity>>() {
+		return doGet(url, new TypeReference<List<Activity>>() {
 		});
 
-	}
-
-	// Test method to verify API client functionality
-	public static void main(String[] args) {
-		StravaAPIClient test = new StravaAPIClient();
-		try {
-			String accessToken = test.getAccessToken();
-			System.out.println("Access Token: " + accessToken);
-			// long activityId = 17072063259L; // Replace with a valid activity ID
-			// Activity activity = test.getActivityById(activityId, accessToken);
-			// System.out.println(ActivityFormatter.formatActivity(activity));
-			// List<Activity> recentActivityData = test.getRecentActivities(accessToken,
-			// 10);
-			// for (Activity a : recentActivityData){
-			// System.out.println(ActivityFormatter.formatActivity(a));
-			// }
-			List<Activity> rangeActivities = test.getRangeActivities(accessToken, 1771708624, 1771276624);
-			Stats rangeActivityStates = new ActivityCalculator().calculateStats(rangeActivities);
-			System.out.println(ActivityFormatter.formatActivities(rangeActivityStates));
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 }

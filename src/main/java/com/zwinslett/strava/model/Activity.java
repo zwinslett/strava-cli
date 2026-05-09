@@ -10,7 +10,7 @@ public class Activity {
     private double distance; // meters
     @JsonProperty("moving_time")
     private int movingTime; // seconds
-    @JsonProperty("elapse_time")
+    @JsonProperty("elapsed_time")
     private int elapsedTime; // seconds
     private String type;
 
@@ -39,11 +39,11 @@ public class Activity {
         return distance;
     }
 
-    public int getMoving_time() {
+    public int getMovingTime() {
         return movingTime;
     }
 
-    public int getElapsed_time() {
+    public int getElapsedTime() {
         return elapsedTime;
     }
 

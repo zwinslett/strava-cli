@@ -19,7 +19,7 @@ public class ActivityCalculator {
   }
 
   public double minutes(Activity activity) {
-    return activity.getMoving_time() / 60.0;
+    return activity.getMovingTime() / 60.0;
   }
 
   public double totalMinutes(List<Activity> activities) {

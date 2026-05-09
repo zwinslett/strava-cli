@@ -17,8 +17,8 @@ public class StatsMonthlyCommand extends BaseCommand implements Runnable {
         long epochNow = Instant.now().getEpochSecond();
         long thirtyDaysAgo = Instant.now().minus(30, ChronoUnit.DAYS).getEpochSecond();
         try {
-            String accessToken = stravaRequest.getAccessToken();
-            List<Activity> recentActivityData = stravaRequest.getRangeActivities(accessToken, epochNow, thirtyDaysAgo);
+            stravaRequest.setAccessToken();
+            List<Activity> recentActivityData = stravaRequest.getRangeActivities(epochNow, thirtyDaysAgo);
             Stats stats = calculator.calculateStats(recentActivityData);
             System.out.println("In the last 30 days ... \n" + ActivityFormatter.formatActivities(stats));
         } catch (Exception e) {

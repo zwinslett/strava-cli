@@ -17,8 +17,8 @@ public class ActivityByIdCommand extends BaseCommand implements Runnable {
     @Override
     public void run() {
         try {
-            String accessToken = stravaRequest.getAccessToken();
-            Activity activity = stravaRequest.getActivityById(activityId, accessToken);
+            stravaRequest.setAccessToken();
+            Activity activity = stravaRequest.getActivityById(activityId);
             Stats activityData = calculator.calculateStat(activity);
             System.out.println(ActivityFormatter.formatActivity(activity, activityData));
         } catch (Exception e) {
