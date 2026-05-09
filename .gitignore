@@ -1,1 +1,16 @@
 config.properties
+# macOS
+.DS_Store
+
+# Metals
+.metals/
+.bloop/
+.scala-build/
+
+# Maven/Java
+target/
+*.class
+
+# IDEs
+.idea/
+.vscode/
