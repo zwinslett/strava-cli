@@ -55,8 +55,7 @@ public class StravaAPIClient {
 		HttpResponse<String> response = this.client.send(request, HttpResponse.BodyHandlers.ofString());
 		if (response.statusCode() == 200) {
 			AccessToken token = mapper.readValue(response.body(), AccessToken.class);
-			String accessToken = token.getToken();
-			this.accessToken = accessToken;
+			this.accessToken = token.getToken();
 		} else {
 			throw new Exception("Failed to get access token: " + response.statusCode());
 		}
