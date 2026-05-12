@@ -2,6 +2,7 @@ package com.zwinslett.strava.cli;
 
 import com.zwinslett.strava.formatter.ActivityFormatter;
 import com.zwinslett.strava.model.Activity;
+import com.zwinslett.strava.model.DetailedActivity;
 import com.zwinslett.strava.model.Stats;
 
 import picocli.CommandLine.Command;
@@ -17,9 +18,9 @@ public class ActivityByIdCommand extends BaseCommand implements Runnable {
     @Override
     public void run() {
         try {
-            Activity activity = stravaRequest.getActivityById(activityId);
+            DetailedActivity activity = stravaRequest.getActivityById(activityId);
             Stats activityData = calculator.calculateStat(activity);
-            System.out.println(ActivityFormatter.formatActivity(activity, activityData));
+            System.out.println(ActivityFormatter.formatDetailedActivity(activity, activityData));
         } catch (Exception e) {
             e.printStackTrace();
         }

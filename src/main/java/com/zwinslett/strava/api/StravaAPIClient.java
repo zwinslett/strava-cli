@@ -6,6 +6,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zwinslett.strava.model.Activity;
+import com.zwinslett.strava.model.DetailedActivity;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.List;
@@ -62,9 +63,9 @@ public class StravaAPIClient {
 	}
 
 	// Method to get activity by ID
-	public Activity getActivityById(long activityId) throws Exception {
+	public DetailedActivity getActivityById(long activityId) throws Exception {
 		String url = STRAVA_BASE_URL + "/activities/" + activityId;
-		return doGet(url, new TypeReference<Activity>() {
+		return doGet(url, new TypeReference<DetailedActivity>() {
 		});
 	}
 
