@@ -1,7 +1,6 @@
 package com.zwinslett.strava.cli;
 
 import com.zwinslett.strava.formatter.ActivityFormatter;
-import com.zwinslett.strava.model.Activity;
 import com.zwinslett.strava.model.DetailedActivity;
 import com.zwinslett.strava.model.Stats;
 

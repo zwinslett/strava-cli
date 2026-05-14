@@ -22,9 +22,10 @@ public class RecentCommand extends BaseCommand implements Runnable {
         }
         try {
             List<Activity> recentActivityData = stravaRequest.getRecentActivities(this.numActivities);
+            System.out.println(ActivityFormatter.formatActivitiesTableHeader());
             for (Activity a : recentActivityData) {
                 Stats stat = calculator.calculateStat(a);
-                System.out.println(ActivityFormatter.formatActivity(a, stat));
+                System.out.println(ActivityFormatter.formatActivitiesTableRows(a, stat));
             }
         } catch (Exception e) {
             e.printStackTrace();

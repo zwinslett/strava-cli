@@ -19,7 +19,8 @@ public class ActivityFormatter {
   }
 
   public static String formatActivity(Activity activity, Stats stat) {
-    return baseFormat(activity, stat);
+    long id = activity.getId();
+    return baseFormat(activity, stat) + " | ID: " + id;
   }
 
   public static String formatActivities(Stats stat) {
@@ -28,5 +29,17 @@ public class ActivityFormatter {
     double minutes = stat.getTotalMinutes();
     return String.format("Total Activities: %d | Distance: %.2f | Total Minutes: %.2f", totalActivities, distance,
         minutes);
+  }
+
+  public static String formatActivitiesTableHeader() {
+    String header = String.format("%-50s %-10s %-10s %-10s%n", "Name", "Distance", "Minutes", "ID");
+    String divider = "-----------------------------------------------------------------------------------";
+    return header + divider;
+
+  }
+
+  public static String formatActivitiesTableRows(Activity activity, Stats stat) {
+    return String.format("%-50s %-10.2f %-10.2f %-10d", activity.getName(), stat.getTotalMiles(), stat.getTotalMinutes(),
+        activity.getId());
   }
 }
