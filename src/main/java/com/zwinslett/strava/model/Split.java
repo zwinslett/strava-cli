@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Split {
     private double distance;
     @JsonProperty("elapsed_time")
-    private double elapsedTime;
+    private int elapsedTime;
     @JsonProperty("elevation_difference")
     private double elevationDifference;
     @JsonProperty("moving_time")
@@ -23,7 +23,7 @@ public class Split {
 
     }
 
-    public Split(double distance, double elapsedTime, double elevationDifference, int movingTime, int split, double averageSpeed,
+    public Split(double distance, int elapsedTime, double elevationDifference, int movingTime, int split, double averageSpeed,
             double averageGradeAdjustedSpeed, double averageHeartrate, int paceZone) {
         this.distance = distance;
         this.elapsedTime = elapsedTime;
@@ -41,7 +41,7 @@ public class Split {
         return this.distance;
     }
 
-    public double getElapsedTime() {
+    public int getElapsedTime() {
         return this.elapsedTime;
     }
 

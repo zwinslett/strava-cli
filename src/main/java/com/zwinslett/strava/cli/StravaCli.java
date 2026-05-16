@@ -6,7 +6,8 @@ import picocli.CommandLine.Command;
 @Command(name = "strava", mixinStandardHelpOptions = true, description = "A command line interface for the Strava API", subcommands = {
         ActivityByIdCommand.class,
         RecentCommand.class,
-        StatsCommand.class
+        StatsCommand.class,
+        SplitsByIdCommand.class
 })
 public class StravaCli implements Runnable {
     @Override

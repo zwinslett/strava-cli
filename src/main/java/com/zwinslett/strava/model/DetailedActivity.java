@@ -14,4 +14,8 @@ public class DetailedActivity extends Activity {
     public String getGearName() {
        return gear.getName();
     }
+
+    public List<Split> getSplits(){
+        return this.splits;
+    }
 }

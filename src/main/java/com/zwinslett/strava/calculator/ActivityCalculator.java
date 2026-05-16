@@ -1,4 +1,4 @@
-package com.zwinslett.strava.service;
+package com.zwinslett.strava.calculator;
 
 import java.util.List;
 
