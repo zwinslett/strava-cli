@@ -6,6 +6,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zwinslett.strava.model.Activity;
+import com.zwinslett.strava.model.Zones;
 import com.zwinslett.strava.model.DetailedActivity;
 import com.fasterxml.jackson.core.type.TypeReference;
 
@@ -86,6 +87,14 @@ public class StravaAPIClient {
 
 		String url = StravaAPIClient.STRAVA_BASE_URL + "/athlete/activities?before=" + before + "&after=" + after;
 		return doGet(url, new TypeReference<List<Activity>>() {
+		});
+
+	}
+
+	// Method to get the zone information associated with an activity. 
+	public List<Zones> getActivityZones(long activityId) throws Exception {
+		String url = STRAVA_BASE_URL + "/activities/" + activityId + "/zones";
+		return doGet(url, new TypeReference<List<Zones>>() {
 		});
 
 	}

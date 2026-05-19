@@ -15,7 +15,7 @@ public class SplitCalculator {
 
         int minutes = moving_time / 60;
         int seconds = moving_time % 60;
-        return String.format("%d Minute %d Seconds", minutes, seconds);
+        return String.format("%d Minute(s) %d Second(s)", minutes, seconds);
 
     }
 
