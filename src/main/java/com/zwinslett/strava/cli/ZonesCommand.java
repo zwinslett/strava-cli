@@ -9,7 +9,7 @@ import picocli.CommandLine.Command;
 })
 public class ZonesCommand implements Runnable {
   @Override
-  public void run(){
+  public void run() {
     System.out.println("Please specify an id, weekly, or monthly.");
   }
 }

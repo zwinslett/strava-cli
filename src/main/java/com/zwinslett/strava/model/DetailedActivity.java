@@ -12,10 +12,10 @@ public class DetailedActivity extends Activity {
     private List<Split> splits;
 
     public String getGearName() {
-       return gear.getName();
+        return gear.getName();
     }
 
-    public List<Split> getSplits(){
+    public List<Split> getSplits() {
         return this.splits;
     }
 }

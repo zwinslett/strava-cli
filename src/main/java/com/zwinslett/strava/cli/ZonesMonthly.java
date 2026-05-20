@@ -15,26 +15,22 @@ import com.zwinslett.strava.model.Zones;
 public class ZonesMonthly extends BaseCommand implements Runnable {
 
     @Override
-    public void run(){
+    public void run() {
         long epochNow = Instant.now().getEpochSecond();
         long thirtyDaysAgo = Instant.now().minus(30, ChronoUnit.DAYS).getEpochSecond();
 
         try {
             List<Activity> activities = stravaRequest.getRangeActivities(epochNow, thirtyDaysAgo);
             List<Zones> allZones = new ArrayList<>();
-            for(Activity activity: activities){
+            for (Activity activity : activities) {
                 List<Zones> zones = stravaRequest.getActivityZones(activity.getId());
                 allZones.addAll(zones);
             }
             List<DistributionBucketsFormatted> buckets = zoneCalculator.calculateHeartRateZones(allZones);
             System.out.println(ZoneFormatter.formatZonesTableHeader());
-            for(DistributionBucketsFormatted bucket: buckets){
+            for (DistributionBucketsFormatted bucket : buckets) {
                 System.out.println(ZoneFormatter.formatZoneTableRows(bucket));
             }
-            System.out.println("Activities fetched: " + activities.size());
-for (Activity activity : activities) {
-    System.out.println(activity.getId() + " - " + activity.getName());
-}
 
         } catch (Exception e) {
             e.printStackTrace();

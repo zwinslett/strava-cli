@@ -1,4 +1,5 @@
 package com.zwinslett.strava.model;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Split {
@@ -23,7 +24,8 @@ public class Split {
 
     }
 
-    public Split(double distance, int elapsedTime, double elevationDifference, int movingTime, int split, double averageSpeed,
+    public Split(double distance, int elapsedTime, double elevationDifference, int movingTime, int split,
+            double averageSpeed,
             double averageGradeAdjustedSpeed, double averageHeartrate, int paceZone) {
         this.distance = distance;
         this.elapsedTime = elapsedTime;
@@ -53,7 +55,7 @@ public class Split {
         return this.movingTime;
     }
 
-    public int getSplit(){
+    public int getSplit() {
         return this.split;
     }
 

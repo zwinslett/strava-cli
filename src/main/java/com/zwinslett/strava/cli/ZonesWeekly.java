@@ -15,20 +15,20 @@ import com.zwinslett.strava.model.Zones;
 public class ZonesWeekly extends BaseCommand implements Runnable {
 
     @Override
-    public void run(){
+    public void run() {
         long epochNow = Instant.now().getEpochSecond();
         long sevenDaysAgo = Instant.now().minus(7, ChronoUnit.DAYS).getEpochSecond();
 
         try {
             List<Activity> activities = stravaRequest.getRangeActivities(epochNow, sevenDaysAgo);
             List<Zones> allZones = new ArrayList<>();
-            for(Activity activity: activities){
+            for (Activity activity : activities) {
                 List<Zones> zones = stravaRequest.getActivityZones(activity.getId());
                 allZones.addAll(zones);
             }
             List<DistributionBucketsFormatted> buckets = zoneCalculator.calculateHeartRateZones(allZones);
             System.out.println(ZoneFormatter.formatZonesTableHeader());
-            for(DistributionBucketsFormatted bucket: buckets){
+            for (DistributionBucketsFormatted bucket : buckets) {
                 System.out.println(ZoneFormatter.formatZoneTableRows(bucket));
             }
 

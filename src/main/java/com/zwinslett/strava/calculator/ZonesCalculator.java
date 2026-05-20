@@ -10,8 +10,6 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.Comparator;
 
-
-
 public class ZonesCalculator {
     private String secsToMins(DistributionBuckets bucket) {
         int time = bucket.getTime();
@@ -22,31 +20,31 @@ public class ZonesCalculator {
 
     }
 
-    public record BucketKey(int min, int max) {};
+    public record BucketKey(int min, int max) {
+    };
 
-    private List<DistributionBuckets> aggregateBuckets(List<Zones> zones){
+    private List<DistributionBuckets> aggregateBuckets(List<Zones> zones) {
         Map<BucketKey, Integer> totals = new TreeMap<>(
-            Comparator.comparingInt(BucketKey::min
-        ));
-        for(Zones zone: zones){
-            for(DistributionBuckets bucket: zone.getDistributionBuckets()){
+                Comparator.comparingInt(BucketKey::min));
+        for (Zones zone : zones) {
+            for (DistributionBuckets bucket : zone.getDistributionBuckets()) {
                 BucketKey key = new BucketKey(bucket.getMin(), bucket.getMax());
-                totals.merge(key, bucket.getTime(),Integer::sum);
+                totals.merge(key, bucket.getTime(), Integer::sum);
 
             }
         }
         List<DistributionBuckets> result = new ArrayList<>();
-        for(Map.Entry<BucketKey,Integer> entry : totals.entrySet()){
+        for (Map.Entry<BucketKey, Integer> entry : totals.entrySet()) {
             BucketKey key = entry.getKey();
-            result.add(new DistributionBuckets(key.min(),key.max(),entry.getValue()));
+            result.add(new DistributionBuckets(key.min(), key.max(), entry.getValue()));
         }
         return result;
     }
 
     public List<DistributionBucketsFormatted> calculateHeartRateZones(List<Zones> zones) {
         List<Zones> heartRateZones = new ArrayList<>();
-        for(Zones zone : zones){
-            if(zone.getType().equals("heartrate")){
+        for (Zones zone : zones) {
+            if (zone.getType().equals("heartrate")) {
                 heartRateZones.add(zone);
             }
         }

@@ -39,7 +39,8 @@ public class ActivityFormatter {
   }
 
   public static String formatActivitiesTableRows(Activity activity, Stats stat) {
-    return String.format("%-50s %-10.2f %-10.2f %-10d", activity.getName(), stat.getTotalMiles(), stat.getTotalMinutes(),
+    return String.format("%-50s %-10.2f %-10.2f %-10d", activity.getName(), stat.getTotalMiles(),
+        stat.getTotalMinutes(),
         activity.getId());
   }
 }

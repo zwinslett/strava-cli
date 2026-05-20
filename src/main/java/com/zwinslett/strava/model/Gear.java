@@ -32,36 +32,36 @@ public class Gear {
         this.convertedDistance = convertedDistance;
     }
 
-    public String getId(){
+    public String getId() {
         return this.id;
     }
 
-    public boolean getPrimary(){
+    public boolean getPrimary() {
         return this.primary;
     }
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 
-    public String getNickName(){
+    public String getNickName() {
         return this.nickname;
 
     }
 
-    public int getResourceState(){
+    public int getResourceState() {
         return this.resourceState;
     }
 
-    public boolean getRetired(){
+    public boolean getRetired() {
         return this.retired;
     }
 
-    public double getDistance(){
+    public double getDistance() {
         return this.distance;
     }
 
-    public double getConvertedDistance(){
+    public double getConvertedDistance() {
         return this.convertedDistance;
     }
 

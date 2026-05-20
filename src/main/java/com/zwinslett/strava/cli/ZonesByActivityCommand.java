@@ -8,19 +8,18 @@ import com.zwinslett.strava.model.DistributionBucketsFormatted;
 import com.zwinslett.strava.model.Zones;
 import java.util.List;
 
-
 @Command(name = "activity", description = "Display an activity's zones for a given activity ID")
 public class ZonesByActivityCommand extends BaseCommand implements Runnable {
-    @Parameters(index = "0", description ="The ID of an activity.")
+    @Parameters(index = "0", description = "The ID of an activity.")
     private long activityId;
 
     @Override
-    public void run(){
-        try{
+    public void run() {
+        try {
             List<Zones> zones = stravaRequest.getActivityZones(activityId);
             List<DistributionBucketsFormatted> buckets = zoneCalculator.calculateHeartRateZones(zones);
             System.out.println(ZoneFormatter.formatZonesTableHeader());
-            for(DistributionBucketsFormatted bucket: buckets){
+            for (DistributionBucketsFormatted bucket : buckets) {
                 System.out.println(ZoneFormatter.formatZoneTableRows(bucket));
             }
 
@@ -29,5 +28,4 @@ public class ZonesByActivityCommand extends BaseCommand implements Runnable {
         }
     }
 
-  
 }

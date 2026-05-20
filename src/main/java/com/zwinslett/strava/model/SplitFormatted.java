@@ -1,29 +1,30 @@
 package com.zwinslett.strava.model;
+
 public class SplitFormatted {
-    int mile; 
+    int mile;
     String movingTime;
     double averageHeartrate;
 
-    public SplitFormatted(){
+    public SplitFormatted() {
 
     }
 
-   public SplitFormatted(int mile, String moving_time, double average_heartrate){
+    public SplitFormatted(int mile, String moving_time, double average_heartrate) {
         this.mile = mile;
         this.movingTime = moving_time;
         this.averageHeartrate = average_heartrate;
     }
 
-    public int getMile(){
+    public int getMile() {
         return this.mile;
     }
 
-    public String getMovingTime(){
+    public String getMovingTime() {
         return this.movingTime;
     }
 
-    public double getAverageHeartRate(){
+    public double getAverageHeartRate() {
         return this.averageHeartrate;
     }
-  
+
 }
