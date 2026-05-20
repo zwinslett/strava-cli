@@ -8,7 +8,7 @@ import picocli.CommandLine.Command;
         RecentCommand.class,
         StatsCommand.class,
         SplitsByIdCommand.class,
-        ZonesByActivityCommand.class
+        ZonesCommand.class
 })
 public class StravaCli implements Runnable {
     @Override

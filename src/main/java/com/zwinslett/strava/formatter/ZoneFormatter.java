@@ -10,6 +10,6 @@ public class ZoneFormatter {
     }
 
     public static String formatZoneTableRows(DistributionBucketsFormatted bucket){
-        return String.format("%-10d %-10d %-30s %-10.2f%n", bucket.getMin(), bucket.getMax(), bucket.getTime(), bucket.getPercentInZone());
+        return String.format("%-10d %-10d %-30s %-10.3f%n", bucket.getMin(), bucket.getMax(), bucket.getTime(), bucket.getPercentInZone());
     }
 }

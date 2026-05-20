@@ -91,7 +91,7 @@ public class StravaAPIClient {
 
 	}
 
-	// Method to get the zone information associated with an activity. 
+	// Method to get the zone information associated with an activity.
 	public List<Zones> getActivityZones(long activityId) throws Exception {
 		String url = STRAVA_BASE_URL + "/activities/" + activityId + "/zones";
 		return doGet(url, new TypeReference<List<Zones>>() {
