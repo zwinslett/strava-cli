@@ -19,7 +19,6 @@ public class ZonesWeekly extends BaseCommand implements Runnable {
   public void run() {
     long epochNow = Instant.now().getEpochSecond();
     long sevenDaysAgo = Instant.now().minus(7, ChronoUnit.DAYS).getEpochSecond();
-
     try {
       List<DistributionBucketsFormatted> buckets = this.zoneAggregatorService.build(sevenDaysAgo, epochNow,
           ZoneType.heartrate);
