@@ -5,7 +5,7 @@ import picocli.CommandLine.Parameters;
 
 import com.zwinslett.strava.formatter.ZoneFormatter;
 import com.zwinslett.strava.model.DistributionBucketsFormatted;
-import com.zwinslett.strava.model.Zones;
+
 import java.util.List;
 import com.zwinslett.strava.calculator.ZonesCalculator.ZoneType;
 
@@ -17,8 +17,7 @@ public class ZonesByActivityCommand extends BaseCommand implements Runnable {
   @Override
   public void run() {
     try {
-      List<Zones> zones = stravaRequest.getActivityZones(activityId);
-      List<DistributionBucketsFormatted> buckets = zoneCalculator.calculateZones(zones, ZoneType.heartrate);
+      List<DistributionBucketsFormatted> buckets = this.zoneAggregatorService.build(activityId, ZoneType.heartrate);
       System.out.println(ZoneFormatter.formatZonesTableHeader());
       for (DistributionBucketsFormatted bucket : buckets) {
         System.out.println(ZoneFormatter.formatZoneTableRows(bucket));

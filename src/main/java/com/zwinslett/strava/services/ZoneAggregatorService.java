@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.zwinslett.strava.calculator.ZonesCalculator;
 import com.zwinslett.strava.model.Activity;
+
 import com.zwinslett.strava.model.DistributionBucketsFormatted;
 import com.zwinslett.strava.model.Zones;
 import com.zwinslett.strava.calculator.ZonesCalculator.ZoneType;
@@ -29,8 +30,11 @@ public class ZoneAggregatorService {
       List<Zones> zones = stravaRequest.getActivityZones(activity.getId());
       allZones.addAll(zones);
     }
-    List<DistributionBucketsFormatted> buckets = this.zoneCalculator.calculateZones(allZones, zoneType);
+    return this.zoneCalculator.calculateZones(allZones, zoneType);
+  }
 
-    return buckets;
+  public List<DistributionBucketsFormatted> build(long activityId, ZoneType zoneType) throws Exception {
+    List<Zones> zones = stravaRequest.getActivityZones(activityId);
+    return this.zoneCalculator.calculateZones(zones, zoneType);
   }
 }
