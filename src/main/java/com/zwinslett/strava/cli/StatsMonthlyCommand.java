@@ -12,16 +12,20 @@ import picocli.CommandLine.Command;
 @Command(name = "monthly", description = "Show stats for the last 30 days")
 public class StatsMonthlyCommand extends BaseCommand implements Runnable {
 
-    @Override
-    public void run() {
-        long epochNow = Instant.now().getEpochSecond();
-        long thirtyDaysAgo = Instant.now().minus(30, ChronoUnit.DAYS).getEpochSecond();
-        try {
-            List<Activity> recentActivityData = stravaRequest.getRangeActivities(epochNow, thirtyDaysAgo);
-            Stats stats = calculator.calculateStats(recentActivityData);
-            System.out.println("In the last 30 days ... \n" + ActivityFormatter.formatActivities(stats));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+  @Override
+  public void run() {
+    long epochNow = Instant.now().getEpochSecond();
+    long thirtyDaysAgo = Instant.now().minus(30, ChronoUnit.DAYS).getEpochSecond();
+    try {
+      List<Activity> recentActivityData = stravaRequest.getRangeActivities(epochNow, thirtyDaysAgo);
+      Stats stats = calculator.calculateStats(recentActivityData);
+      if (json) {
+        printJson(stats);
+      } else {
+        System.out.println("In the last 30 days ... \n" + ActivityFormatter.formatActivities(stats));
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
     }
+  }
 }

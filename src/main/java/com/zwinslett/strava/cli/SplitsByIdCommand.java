@@ -19,9 +19,14 @@ public class SplitsByIdCommand extends BaseCommand implements Runnable {
     try {
       DetailedActivity activity = this.activityDetailsService.getDetailedActivity(activityId);
       List<SplitFormatted> splits = this.activityDetailsService.getSplits(activity);
-      System.out.println(SplitFormatter.formatSplitsTableHeader());
-      for (SplitFormatted split : splits) {
-        System.out.println(SplitFormatter.formatSplitsTableRows(split));
+      if (json) {
+        this.printJson(activity.getSplits());
+      } else {
+        System.out.println(SplitFormatter.formatSplitsTableHeader());
+        for (SplitFormatted split : splits) {
+          System.out.println(SplitFormatter.formatSplitsTableRows(split));
+        }
+
       }
     } catch (Exception e) {
       e.printStackTrace();

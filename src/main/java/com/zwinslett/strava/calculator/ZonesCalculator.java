@@ -11,15 +11,6 @@ import java.util.TreeMap;
 import java.util.Comparator;
 
 public class ZonesCalculator {
-  private String secsToMins(DistributionBuckets bucket) {
-    int time = bucket.getTime();
-
-    int minutes = time / 60;
-    int seconds = time % 60;
-    return String.format("%d Minute(s) %d Second(s)", minutes, seconds);
-
-  }
-
   public enum ZoneType {
     pace,
     heartrate,
@@ -63,10 +54,9 @@ public class ZonesCalculator {
     }
 
     for (DistributionBuckets bucket : buckets) {
-      String minutes = secsToMins(bucket);
       double percentInZone = (double) bucket.getTime() / totalTime;
       DistributionBucketsFormatted cleanBucket = new DistributionBucketsFormatted(bucket.getMin(),
-          bucket.getMax(), percentInZone, minutes);
+          bucket.getMax(), percentInZone, bucket.getTime());
       cleanBuckets.add(cleanBucket);
     }
     return cleanBuckets;

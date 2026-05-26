@@ -22,9 +22,14 @@ public class ZonesWeekly extends BaseCommand implements Runnable {
     try {
       List<DistributionBucketsFormatted> buckets = this.zoneAggregatorService.build(sevenDaysAgo, epochNow,
           ZoneType.heartrate);
-      System.out.println(ZoneFormatter.formatZonesTableHeader());
-      for (DistributionBucketsFormatted bucket : buckets) {
-        System.out.println(ZoneFormatter.formatZoneTableRows(bucket));
+      if (json) {
+        printJson(buckets);
+      } else {
+        System.out.println(ZoneFormatter.formatZonesTableHeader());
+        for (DistributionBucketsFormatted bucket : buckets) {
+          System.out.println(ZoneFormatter.formatZoneTableRows(bucket));
+        }
+
       }
     } catch (Exception e) {
       e.printStackTrace();
