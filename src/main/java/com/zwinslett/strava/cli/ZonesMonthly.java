@@ -24,7 +24,7 @@ public class ZonesMonthly extends BaseCommand implements Runnable {
       List<DistributionBucketsFormatted> buckets = this.zoneAggregatorService.build(thirtyDaysAgo, epochNow,
           ZoneType.heartrate);
       if (json) {
-        printJson(buckets);
+        this.printJson(buckets);
       } else {
         System.out.println(ZoneFormatter.formatZonesTableHeader());
         for (DistributionBucketsFormatted bucket : buckets) {

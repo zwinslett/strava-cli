@@ -20,7 +20,7 @@ public class StatsMonthlyCommand extends BaseCommand implements Runnable {
       List<Activity> recentActivityData = stravaRequest.getRangeActivities(epochNow, thirtyDaysAgo);
       Stats stats = calculator.calculateStats(recentActivityData);
       if (json) {
-        printJson(stats);
+        this.printJson(stats);
       } else {
         System.out.println("In the last 30 days ... \n" + ActivityFormatter.formatActivities(stats));
       }

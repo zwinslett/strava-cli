@@ -19,7 +19,7 @@ public class ZonesByActivityCommand extends BaseCommand implements Runnable {
     try {
       List<DistributionBucketsFormatted> buckets = this.zoneAggregatorService.build(activityId, ZoneType.heartrate);
       if (json) {
-        printJson(buckets);
+        this.printJson(buckets);
       } else {
         System.out.println(ZoneFormatter.formatZonesTableHeader());
         for (DistributionBucketsFormatted bucket : buckets) {

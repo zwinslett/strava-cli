@@ -20,7 +20,7 @@ public class StatsWeeklyCommand extends BaseCommand implements Runnable {
       List<Activity> recentActivityData = stravaRequest.getRangeActivities(epochNow, sevenDaysAgo);
       Stats stats = calculator.calculateStats(recentActivityData);
       if (json) {
-        printJson(stats);
+        this.printJson(stats);
       } else {
         System.out.println("In the last seven days ... \n" + ActivityFormatter.formatActivities(stats));
       }
